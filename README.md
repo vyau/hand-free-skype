@@ -3,10 +3,6 @@ This project attemps to automate Skype interaction for voice/video calls. <br>
 Instead of using mouse clicks to manage Skype, I integrated this control with <br>
 Sphinx4 voice input<br>
 This was designed for those with disability and unable to easily control Skype with their hands<br>
-Please see my other Github project for the voice input portion: <br>
-<ul> <li>
-</ul>
-
 <p>
 
 This project relies on Sikuli (http://www.sikuli.org/) which is an open source project. <br>
