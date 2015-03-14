@@ -1,0 +1,153 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>skype.sikuli\skype.sikuli</h2> <a href="skype.sikuli\skype.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="cmt">## To-Do</span>
+<span class="cmt">##  1&gt;auto answer call (done)</span>
+<span class="cmt">##  2&gt;auto answer video call  </span>
+<span class="cmt">##  3&gt;selective answer call</span>
+<span class="cmt">##  &gt;&gt;&gt;&gt;&gt;  Need to integrate with voiceinput</span>
+<span class="cmt">##</span>
+<span class="cmt">##  4&gt;loop scan for login page, then perform login if detected  (done)</span>
+<span class="cmt">##  &gt;&gt;&gt;&gt;&gt;  store login/password in external JAR as a function   (done)</span>
+<span class="cmt">## </span>
+<span class="cmt">##  5&gt;  auto reject  (done)</span>
+<span class="cmt">##  6&gt;  need boolean to control options (e.g. in reject call mode)  (done)</span>
+<span class="cmt">##  </span>
+<span class="cmt">##  7&gt;  dial out (call skyper node.js)</span>
+<span class="cmt">##  &gt;&gt;&gt;&gt;&gt;  need to handle user list on Skype</span>
+
+<span class="cmt">## storing Skype login credentials at external Java class</span>
+<span class="cmt">## This Java class has 2 methods, for retreiving skype login and skype password.</span>
+<span class="cmt">## Info is hardcoded in Java class and compiled as Java bytecode.</span>
+<span class="cmt">## Loading from Java class would prevent having login/password stored in</span>
+<span class="cmt">## plain text in this Python script.</span>
+<span class="cmt">##</span>
+<span class="cmt">## Please refer to SkypeCredentials.java for details how to prepare your</span>
+<span class="cmt">## skype login/password info.</span>
+<span class="cmt">##</span>
+mypath = <span class="str">"Skype.jar"</span>
+load(mypath)
+<span class="kw">import</span> SkypeCredentials
+
+mypath2 = <span class="str">"voinput_single.jar"</span>
+load(mypath2)
+<span class="kw">import</span> org.voinput.dialog.DialogDemo
+voiceinput = org.voinput.dialog.DialogDemo().getDialogDemoInstance()
+voiceinput.start()
+
+rejectcall = <span class="dig">0</span>
+<span class="kw">print</span> <span class="str">"In startup default mode, accept all calls"</span>
+<span class="kw">while</span> True:
+
+    lastCommand = voiceinput.lastMatchedInput()
+    <span class="kw">print</span> <span class="str">"&gt;&gt;&gt;"</span>, lastCommand, <span class="str">"&lt;&lt;&lt;"</span>
+    <span class="kw">if</span> lastCommand.strip() == <span class="str">"reject"</span>:
+        <span class="kw">print</span> <span class="str">"Reject calls"</span>
+        rejectcall = <span class="dig">1</span>
+    <span class="kw">elif</span> lastCommand.strip() == <span class="str">"answer"</span>:
+        <span class="kw">print</span> <span class="str">"Answer calls"</span>
+        rejectcall = <span class="dig">0</span>
+
+    <span class="kw">if</span> rejectcall == <span class="dig">1</span>:
+        <span class="kw">print</span> <span class="str">"Current state -- reject calls"</span>
+    <span class="kw">elif</span> rejectcall == <span class="dig">0</span>:
+        <span class="kw">print</span> <span class="str">"Current state -- answer calls"</span>
+
+
+    <span class="cmt">## detected login screen, perhaps after a restart, then login</span>
+    <span class="kw">if</span> exists(<img src="1425260366156.png" />):
+        <span class="skw">click</span>(<img src="1425260366156.png" />)
+        <span class="skw">sleep</span>(<span class="dig">3</span>)
+        <span class="cmt">#doubleClick("1425949584209.png")</span>
+        <span class="cmt">#type(SkypeCredentials.getLogin())</span>
+        <span class="cmt">#sleep(1)</span>
+
+        <span class="skw">click</span>(<img src="1425260453448.png" />)
+
+        <span class="skw">type</span>(SkypeCredentials.getPasswd())
+
+        <span class="skw">click</span>(<img src="1425519724951.png" />)
+
+
+
+    <span class="cmt">## auto answer calls</span>
+    <span class="kw">if</span> exists(<img src="1425529755998.png" />) <span class="kw">and</span> rejectcall == <span class="dig">0</span>:
+        <span class="skw">click</span>(<img src="1425529755998.png" />)
+    <span class="skw">sleep</span>(<span class="dig">10</span>)
+
+    <span class="cmt">## auto reject calls </span>
+    <span class="kw">if</span> exists(<img src="1425875181378.png" />) <span class="kw">and</span> rejectcall == <span class="dig">1</span>:
+        <span class="skw">click</span>(<img src="1425875181378.png" />)
+    <span class="skw">sleep</span>(<span class="dig">10</span>)
+</pre>
+</body>
+</html>
