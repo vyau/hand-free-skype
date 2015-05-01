@@ -33,3 +33,26 @@ Files Listing:<br>
 
 </ul>
 <p>
+
+<p>
+To install and run, execute these steps in order: 
+<ul>
+<li> 1)  create symbolic link hand-free-skype.py and point to skype.py
+         <br>  ln -s skype.py hand-free-skype.py
+<li> 2)  Edit SkypeCredentials.java, enter your Skype account login under getLogin().
+        <br> For example, if login is "blackbird", 
+        <br>  public static String getLogin() {  return "blackbird" ;  }
+<li>  3) Edit SkypeCredentials.java, enter your Skype account password under getPasswd().
+        <br>  For example, if password is "hello",
+        <br>  public static String getPasswd() { return "hello" ; }
+
+<li>  4) Issue this command  "javac SkypeCredentials.java"
+</ul> 
+<p><br>
+
+Assuming that you have Sikuli installed, to run this program:
+
+ "cd <to the parent directory of hand-free-skype> ; runIDE -r hand-free-skype" <br>
+(runIDE is a script provided by Sikuli)
+<br> 
+<p>
