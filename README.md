@@ -11,7 +11,9 @@ This project relies on Sikuli (http://www.sikuli.org/) which is an open source p
 
  <p>
 
- This project has been tested under Ubuntu and Linux Mint which are my primary development platforms<br>
+ This project has been tested under Ubuntu and Linux Mint which are my primary development platforms<br>  
+Current compability is for Skype running on Linux.<br>
+
  Since Sikuli is leveraging Java, this should run on other platforms such as Windows or Mac <br>
  Minor tweaks may be needed to make it portable to other platforms <br>
 <p>
@@ -57,3 +59,8 @@ Assuming that you have Sikuli installed, to run this program:
 (runIDE is a script provided by Sikuli)
 <br> 
 <p>
+<h2> Latest Status </h2>
+<ul>
+<li> March 2015 -- Current capability only has accepting all calls and denying all calls.  It can interact with voiceinterface mentioned above to toggle this accept/deny capability.   More options are being programmed.
+
+</ul>
