@@ -1,4 +1,5 @@
 
+
 This project attemps to automate Skype interaction for voice/video calls. <br>
 Instead of using mouse clicks to manage Skype, I integrated this control with <br>
 Sphinx4 voice input<br>
